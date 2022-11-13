@@ -1,16 +1,19 @@
 package com.eminerarslan.kodlama_io_dev.business.abstracts;
 
+import com.eminerarslan.kodlama_io_dev.business.requests.programminglanguage.CreateProgrammingLanguageRequest;
+import com.eminerarslan.kodlama_io_dev.business.requests.programminglanguage.UpdateProgrammingLanguageRequest;
+import com.eminerarslan.kodlama_io_dev.business.responses.programminglanguage.GetProgrammingLanguageByIdResponse;
+import com.eminerarslan.kodlama_io_dev.core.utils.results.DataResult;
 import com.eminerarslan.kodlama_io_dev.core.utils.results.Result;
-import com.eminerarslan.kodlama_io_dev.entities.concretes.ProgrammingLanguage;
 
 public interface ProgrammingLanguageService {
     Result getAll();
 
-    Result getById(int id);
+    DataResult<GetProgrammingLanguageByIdResponse> getById(int id);
 
-    Result create(ProgrammingLanguage programmingLanguage);
+    Result create(CreateProgrammingLanguageRequest createProgrammingLanguageRequest);
 
     Result deleteById(int id);
 
-    Result updateById(int id, String name);
+    Result updateById(int id, UpdateProgrammingLanguageRequest updateProgrammingLanguageRequest);
 }

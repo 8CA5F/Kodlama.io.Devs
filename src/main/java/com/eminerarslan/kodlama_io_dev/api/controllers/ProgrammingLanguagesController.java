@@ -1,10 +1,13 @@
 package com.eminerarslan.kodlama_io_dev.api.controllers;
 
 import com.eminerarslan.kodlama_io_dev.business.abstracts.ProgrammingLanguageService;
+import com.eminerarslan.kodlama_io_dev.business.requests.programminglanguage.CreateProgrammingLanguageRequest;
+import com.eminerarslan.kodlama_io_dev.business.requests.programminglanguage.UpdateProgrammingLanguageRequest;
 import com.eminerarslan.kodlama_io_dev.core.utils.results.Result;
-import com.eminerarslan.kodlama_io_dev.entities.concretes.ProgrammingLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/programming-languages")
@@ -18,26 +21,26 @@ public class ProgrammingLanguagesController {
 
     @GetMapping
     Result getAll() {
-        return this.programmingLanguageService.getAll();
+        return programmingLanguageService.getAll();
     }
 
     @GetMapping("/{id}")
     Result getById(@PathVariable int id) {
-        return this.programmingLanguageService.getById(id);
+        return programmingLanguageService.getById(id);
     }
 
     @PostMapping
-    Result create(@RequestBody ProgrammingLanguage programmingLanguage) {
-        return this.programmingLanguageService.create(programmingLanguage);
+    Result create(@Valid @RequestBody CreateProgrammingLanguageRequest createProgrammingLanguageRequest) {
+        return programmingLanguageService.create(createProgrammingLanguageRequest);
     }
 
     @DeleteMapping("/{id}")
     Result deleteById(@PathVariable int id) {
-        return this.programmingLanguageService.deleteById(id);
+        return programmingLanguageService.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    Result updateById(@PathVariable int id, @RequestBody ProgrammingLanguage programmingLanguage) {
-        return this.programmingLanguageService.updateById(id, programmingLanguage.getName());
+    Result updateById(@Valid @PathVariable int id, @RequestBody UpdateProgrammingLanguageRequest updateProgrammingLanguageRequest) {
+        return programmingLanguageService.updateById(id, updateProgrammingLanguageRequest);
     }
 }

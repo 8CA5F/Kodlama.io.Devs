@@ -8,25 +8,25 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
-@Table(name = "programming_languages")
+@Table(name = "sub_technologies")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProgrammingLanguage {
+public class SubTechnology {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private int id;
 
     @Column(name = "name", nullable = false, unique = true)
-    @Size(min = 1, max = 15, message = "Programming language size must be between 1-15")
+    @Size(min = 2, max = 15, message = "Sub technology size must be between 2-15")
     @NotNull(message = "Name is required")
     private String name;
 
-    @OneToMany(mappedBy = "programmingLanguage")
-    private List<SubTechnology> subTechnologies;
+    @JoinColumn(name = "programming_language_id")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private ProgrammingLanguage programmingLanguage;
 }
